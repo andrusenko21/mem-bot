@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemBot", "MemBotWorker\MemBot.csproj", "{375888FD-4EE4-46C0-95A7-E3A24C585D85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemBotDataAccess", "MemBotDataAccess\MemBotDataAccess.csproj", "{11D257E0-198A-44C2-83A4-FB161707DF98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemBotModels", "MemBotModels\MemBotModels.csproj", "{B530A1DD-9C43-4FF0-A0AF-A2454B033F09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemBot.Tests", "MemBot.Tests\MemBot.Tests.csproj", "{83277E60-D31B-439C-BE42-DBA236E88E5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{375888FD-4EE4-46C0-95A7-E3A24C585D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375888FD-4EE4-46C0-95A7-E3A24C585D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375888FD-4EE4-46C0-95A7-E3A24C585D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375888FD-4EE4-46C0-95A7-E3A24C585D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D257E0-198A-44C2-83A4-FB161707DF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D257E0-198A-44C2-83A4-FB161707DF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D257E0-198A-44C2-83A4-FB161707DF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D257E0-198A-44C2-83A4-FB161707DF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B530A1DD-9C43-4FF0-A0AF-A2454B033F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B530A1DD-9C43-4FF0-A0AF-A2454B033F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B530A1DD-9C43-4FF0-A0AF-A2454B033F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B530A1DD-9C43-4FF0-A0AF-A2454B033F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83277E60-D31B-439C-BE42-DBA236E88E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83277E60-D31B-439C-BE42-DBA236E88E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83277E60-D31B-439C-BE42-DBA236E88E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83277E60-D31B-439C-BE42-DBA236E88E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D8EB1C0-C6F4-42B1-A84B-68F5924997B1}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "MemBotWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
