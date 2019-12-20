@@ -29,7 +29,7 @@ namespace MemBotWorker
 
         public MemBotClient(IMemService memService)
         {
-            string token = Environment.GetEnvironmentVariable("MEM_BOT_TOKEN");
+            string token = Environment.GetEnvironmentVariable("MEM_BOT_TOKEN", EnvironmentVariableTarget.User);
             _bot = new TelegramBotClient(token);
             _memService = memService;
             _bot.OnMessage += OnMessage;
