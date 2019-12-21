@@ -1,6 +1,7 @@
 ﻿using MemBot.Parsers;
 using MemBotModels.Models;
 using MemBotModels.ServicePrototypes;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,7 @@ namespace MemBotWorker
         private readonly TelegramBotClient _bot;
 
         // TODO: Maybe it is better to create ServiceFactory
-        private readonly IMemService _memService;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
         private Dictionary<MessageType, Func<Message, Task>> _messageHandlers;
         // TODO: Maybe it is better to extract command handlers to separate class
         private Dictionary<ServiceCommand, Func<Message, string[], Task>> _serviceCommandHandlers;
@@ -27,11 +28,11 @@ namespace MemBotWorker
 
         #region MemBot initialization
 
-        public MemBotClient(IMemService memService)
+        public MemBotClient(IServiceScopeFactory serviceScopeFactory)
         {
             string token = Environment.GetEnvironmentVariable("MEM_BOT_TOKEN", EnvironmentVariableTarget.User);
             _bot = new TelegramBotClient(token);
-            _memService = memService;
+            _serviceScopeFactory = serviceScopeFactory;
             _bot.OnMessage += OnMessage;
             InitializeMessageHandlers();
             InitializeServiceCommandHandlers();
@@ -85,7 +86,10 @@ namespace MemBotWorker
                 foreach (var command in CommandParser.ParseAudioCommandChain(message.Text))
                 {
                     // TODO: Check that command exists before trying to get it from the database.
-                    Mem mem = _memService.Get(command);
+                    using var scope = _serviceScopeFactory.CreateScope();
+                    IMemService memService = scope.ServiceProvider.GetService<IMemService>();
+                    Mem mem = memService.Get(command);
+
                     if (mem == null) continue;
 
                     using var audioStream = new MemoryStream(mem.Content);
@@ -127,7 +131,9 @@ namespace MemBotWorker
                 using MemoryStream audioStream = new MemoryStream();
                 var file = await _bot.GetInfoAndDownloadFileAsync(message.Audio.FileId, audioStream);
 
-                _memService.Add(new Mem
+                using var scope = _serviceScopeFactory.CreateScope();
+                IMemService memService = scope.ServiceProvider.GetService<IMemService>();
+                memService.Add(new Mem
                 {
                     Command = $"/{commandName}",
                     FileName = fileName,
@@ -148,7 +154,9 @@ namespace MemBotWorker
             {
                 string command = $"/{args[0]}";
 
-                _memService.Delete(new Mem { Command = command });
+                using var scope = _serviceScopeFactory.CreateScope();
+                IMemService memService = scope.ServiceProvider.GetService<IMemService>();
+                memService.Delete(new Mem { Command = command });
                 await SendTextAsync(message, $"The {command} was successfully removed.");
             }
             catch(Exception ex)
@@ -164,7 +172,10 @@ namespace MemBotWorker
             try
             {
                 string pattern = (args != null && args.Length != 0) ? args[0] : string.Empty;
-                var commands = _memService.GetHelp(pattern);
+
+                using var scope = _serviceScopeFactory.CreateScope();
+                IMemService memService = scope.ServiceProvider.GetService<IMemService>();
+                var commands = memService.GetHelp(pattern);
 
                 await _bot.SendTextMessageAsync(message.Chat.Id, string.Join('\n', commands));
             }

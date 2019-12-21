@@ -16,11 +16,7 @@ namespace MemBotWorker
         public MemBotWorker(ILogger<MemBotWorker> logger, IServiceScopeFactory serviceScopeFactory)
         {
             _logger = logger;
-
-            using var scope = serviceScopeFactory.CreateScope();
-            IMemService memService = scope.ServiceProvider.GetService<IMemService>();
-
-            _memBot = new MemBotClient(memService);
+            _memBot = new MemBotClient(serviceScopeFactory);
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
