@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MemBotWorker\MemBot.csproj" />
+    <ProjectReference Include="..\MemBot\MemBot.csproj" />
   </ItemGroup>
 
 </Project>
